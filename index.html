@@ -3,39 +3,191 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Feliz Dia dos Namorados</title>
+  <title>Para Anna Carolina 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@300&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(to right, #ffb6c1, #ffe4e1);
-      font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background: #fefbf7;
+      color: #4e3e36;
+      overflow-x: hidden;
+    }
+
+    .start-screen {
+      height: 100vh;
+      background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 50px;
-      color: #800000;
+      padding: 30px;
     }
-    h1 {
-      font-size: 3em;
-      margin-bottom: 0.5em;
+
+    .start-screen h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      margin-bottom: 20px;
     }
-    p {
-      font-size: 1.5em;
-      max-width: 600px;
-      margin: auto;
+
+    .start-screen button {
+      background-color: #dec7b1;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2em;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
+
+    .card-content {
+      display: none;
+      padding: 30px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .card-content h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    .typing {
+      font-size: 1.2em;
+      line-height: 1.6;
+      white-space: pre-line;
+      min-height: 120px;
+      margin-top: 10px;
+    }
+
+    .photos {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .polaroid {
+      background: white;
+      padding: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+      width: 80%;
+      max-width: 300px;
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+    }
+
+    .polaroid:hover {
+      transform: scale(1.03);
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
     .heart {
-      font-size: 4em;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      animation: float 6s linear infinite;
       color: red;
-      animation: pulse 1s infinite;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 600px) {
+      .photos {
+        flex-direction: row;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="heart">❤️</div>
-  <h1>Feliz Dia dos Namorados, meu amor!</h1>
-  <p>Preparei essa pequena surpresa só pra lembrar o quanto você é especial pra mim. Te amo mais a cada dia ❤️</p>
+
+  <div class="start-screen">
+    <h1>Para Anna Carolina 💌</h1>
+    <button onclick="abrirCartao()">Abrir o cartão</button>
+  </div>
+
+  <div class="card-content">
+    <h2>Meu amor,</h2>
+    <p class="typing" id="cartaTexto">
+      <!-- Texto vai aparecer aqui com efeito de digitação -->
+    </p>
+
+    <div class="photos">
+      <div class="polaroid"><img src="Imagem do WhatsApp de 2025-06-11 à(s) 09.17.30_9438204e.jpg" alt="Foto 1" /></div>
+      <div class="polaroid"><img src="Imagem do WhatsApp de 2025-06-11 à(s) 09.17.30_3a298fea.jpg" alt="Foto 2" /></div>
+      <div class="polaroid"><img src="Imagem do WhatsApp de 2025-06-11 à(s) 09.17.30_c65617a8.jpg" alt="Foto 3" /></div>
+    </div>
+  </div>
+
+  <script>
+    const carta = `Aqui você pode escrever sua mensagem para a Anna Carolina.
+Fica tranquilo, isso é só um exemplo.
+Pode ser uma carta romântica, um trecho de uma música, ou até uma história.
+
+Tudo que quiser dizer para ela 💖`;
+
+    let i = 0;
+    function digitarTexto() {
+      if (i < carta.length) {
+        document.getElementById("cartaTexto").innerHTML += carta.charAt(i);
+        i++;
+        setTimeout(digitarTexto, 35);
+      }
+    }
+
+    function abrirCartao() {
+      document.querySelector('.start-screen').style.display = 'none';
+      document.querySelector('.card-content').style.display = 'block';
+      digitarTexto();
+      soltarCoracoes();
+    }
+
+    function soltarCoracoes() {
+      const container = document.createElement('div');
+      container.classList.add('hearts');
+      document.body.appendChild(container);
+
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.innerHTML = '❤️';
+        container.appendChild(heart);
+
+        setTimeout(() => {
+          container.removeChild(heart);
+        }, 6000);
+      }, 500);
+    }
+  </script>
 </body>
 </html>
